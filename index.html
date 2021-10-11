@@ -27,7 +27,7 @@
 <body>
     <div id="mymap"></div>
     <script>
-        var mymap = L.map("mymap").setView([10.030154, 105.772210], 15);
+        //var mymap = L.map("mymap").setView([10.030154, 105.772210], 15);
         // Ban do nen - Raster
         // Google
         {
@@ -67,13 +67,21 @@
         //Ban do nen - Vector - Mapbox - Yêu cầu internet để load thư viện
         {
             L.mapboxGL(
-                {
-                    attribution: "<b style='color: green'>Nguyen Chi Bao</b>",
-                    // minZoom: 5,
+               {
+                   attribution: "<b style='color: green'>Nguyen Chi Bao</b>",
+                   // minZoom: 5,
                     // maxZoom: 20,
-                    style: "https://api.maptiler.com/maps/eab7489d-2da7-47b9-99d6-726957ac69b9/style.json?key=LqNMkbb8wWPuAlticl7z"
+                    style: "mapbox://styles/mapbox/streets-v11",
+                    accessToken: "pk.eyJ1Ijoibmd1eWVuYmFvMTQwMyIsImEiOiJja3VmNmxoeGIxcm5tMm5vMzY5NTlvM3M1In0.hZe8kTx5IOhr7RTupKYjsA"
                 }
-            ).addTo(mymap);
+//             ).addTo(mymap);
+//             mapboxgl.accessToken = 'pk.eyJ1Ijoibmd1eWVuYmFvMTQwMyIsImEiOiJja3VmNmxoeGIxcm5tMm5vMzY5NTlvM3M1In0.hZe8kTx5IOhr7RTupKYjsA';
+//             const map = new mapboxgl.Map({
+//             container: 'mymap', // container ID
+//             style: 'mapbox://styles/mapbox/streets-v11', // style URL
+//             center: [-74.5, 40], // starting position [lng, lat]
+//             zoom: 9 // starting zoom
+//             });
         }
         //Them cac doi tuong rieng le
         //Point
