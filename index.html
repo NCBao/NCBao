@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Leaflet Lab</title>
+    <meta charset="utf-8" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #mymap {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/leaflet.css" />
+    <script src="./js/leaflet.js"></script>
+    <noscript>Your browser does not support javascript!</noscript>
+    <!-- Mapbox GL -->
+    <link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.css" />
+    <script src="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.js"></script>
+    <script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"></script>
+</head>
+
+<body>
+    <div id="mymap"></div>
+    <script>
+        var mymap = L.map("mymap").setView([10.030154, 105.772210], 15);
+        // Ban do nen - Raster
+        // Google
+        {
+            // L.tileLayer(
+            //     "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}",
+            //     {
+            //         attribution: "<b style='color: green'>Nguyen Chi Bao</b>",
+            //         minZoom: 5,
+            //         maxZoom: 20
+            //     }
+            // ).addTo(mymap);
+        }
+        //OpenStreetMap
+        {
+            // L.tileLayer(
+            //     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            //     {
+            //         attribution: "<b style='color: green'>Nguyen Chi Bao</b>",
+            //         minZoom: 5,
+            //         maxZoom: 20
+            //     }
+            // ).addTo(mymap);
+        }
+        //Mapbox
+        {
+            // L.tileLayer(
+            //     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+            //     {
+            //         attribution: "<b style='color: green'>Nguyen Chi Bao</b>",
+            //         minZoom: 5,
+            //         maxZoom: 20,
+            //         id: 'mapbox/streets-v11',
+            //         accessToken: "pk.eyJ1Ijoibmd1eWVuYmFvMTQwMyIsImEiOiJja3VmNmxoeGIxcm5tMm5vMzY5NTlvM3M1In0.hZe8kTx5IOhr7RTupKYjsA"
+            //     }
+            // ).addTo(mymap);
+        }
+        //Ban do nen - Vector - Mapbox - Yêu cầu internet để load thư viện
+        {
+            L.mapboxGL(
+                {
+                    attribution: "<b style='color: green'>Nguyen Chi Bao</b>",
+                    // minZoom: 5,
+                    // maxZoom: 20,
+                    style: "https://api.maptiler.com/maps/eab7489d-2da7-47b9-99d6-726957ac69b9/style.json?key=LqNMkbb8wWPuAlticl7z"
+                }
+            ).addTo(mymap);
+        }
+        //Them cac doi tuong rieng le
+        //Point
+        L.marker([10.030116731440696, 105.77140510082245]).bindPopup("Trung tâm học liệu - DHCT").addTo(mymap);
+        L.marker([10.031025308142844, 105.76906621456146]).bindPopup("Khoa CNTT - DHCT").addTo(mymap);
+        //Polyline
+        L.polyline([[10.030227662453695, 105.7721534371376], [10.030935507070662, 105.77123880386353], [10.031196986593898, 105.77098935842513]]).bindPopup("Đường cổng A - DHCT").addTo(mymap);
+        //Polygon
+        L.polygon([
+            [
+                [10.029493404089795, 105.77092230319977],
+                [10.02985260982827, 105.77122807502747],
+                [10.030486501336306, 105.7704770565033],
+                [10.030127296300709, 105.77018201351164],
+                [10.029493404089795, 105.77092230319977]
+            ]
+        ]).bindPopup("Nhà điều hành - DHCT").addTo(mymap);
+        //Them cac doi tuong vao layer
+        var layer = L.layerGroup().addTo(mymap);
+        // GeoJSON point
+        var GeoPoint = [
+            {
+                type: "Feature",
+                properties: {
+                    name: "Khoa Nông Nghiệp - DHCT"
+                },
+                geometry: {
+                    type: "Point",
+                    coordinates: [
+                        105.7677412033081,
+                        10.030016365253333
+                    ]
+                }
+            },
+            {
+                type: "Feature",
+                properties: {
+                    name: "Khoa Sư Phạm - DHCT"
+                },
+                geometry: {
+                    type: "Point",
+                    coordinates: [
+                        105.76833128929137,
+                        10.028278440552086
+                    ]
+                }
+            }
+        ]
+        //GeoJSON polyline
+        var GeoPolyline = {
+            type: "Feature",
+            properties: {
+                name: "Đường Cổng B - DHCT"
+            },
+            geometry: {
+                type: "LineString",
+                coordinates: [
+                    [
+                        105.77109932899475,
+                        10.029028549013493
+                    ],
+                    [
+                        105.77008008956909,
+                        10.029662442133981
+                    ],
+                    [
+                        105.76887845993042,
+                        10.030354440707757
+                    ],
+                    [
+                        105.76782166957855,
+                        10.031046437803264
+                    ],
+                    [
+                        105.76664686203003,
+                        10.031785975049782
+                    ],
+                    [
+                        105.765380859375,
+                        10.032604746460196
+                    ]
+                ]
+            }
+        }
+        //GeoJSON Polygon
+        var GeoPolygon = {
+            type: "Feature",
+            properties: {
+                name: "Khoa Môi Trường - DHCT"
+            },
+            geometry: {
+                type: "Polygon",
+                coordinates: [
+                    [
+                        [
+                            105.76484441757201,
+                            10.028368242360795
+                        ],
+                        [
+                            105.7641738653183,
+                            10.027602284957798
+                        ],
+                        [
+                            105.76520383358002,
+                            10.02681519580917
+                        ],
+                        [
+                            105.76615333557129,
+                            10.027195534428428
+                        ],
+                        [
+                            105.76484441757201,
+                            10.028368242360795
+                        ]
+                    ]
+                ]
+            }
+        }
+        //Tong hop
+        var GeoJSON = {
+            type: "FeatureCollection",
+            features: [
+                ...GeoPoint,
+                GeoPolyline,
+                GeoPolygon
+            ]
+        }
+        //Them vao layer
+        L.geoJSON(GeoJSON).bindPopup((f) => f.feature.properties.name).addTo(layer);
+        //Nap tu QGis
+        fetch("https://raw.githubusercontent.com/NCBao/NCBao/main/DIEMNHOM01.geojson")
+            .then(res => res.json())
+            .then(data => {
+                var dizitizingLayer = L.layerGroup().addTo(mymap);
+                L.geoJSON(data ? data : null).bindPopup((f) => f.feature.properties.TenQuan).addTo(dizitizingLayer);
+            })
+            .catch(err => console.log("Xay ra loi CallAPI\nLog: " + err));
+    </script>
+</body>
+
+</html>
